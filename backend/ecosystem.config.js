@@ -1,10 +1,12 @@
 module.exports = {
   apps: [{
     name: 'waste-classifier-api',
-    script: 'app.py',
-    interpreter: 'python3',
+    script: 'gunicorn',
+    args: '-w 4 -b 0.0.0.0:5000 app:app',
+    interpreter: 'none',
     cwd: '/home/ubuntu/classification_waste/backend',
     instances: 1,
+    exec_mode: 'fork',
     autorestart: true,
     watch: false,
     max_memory_restart: '1G',
