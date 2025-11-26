@@ -5,6 +5,7 @@ module.exports = {
     interpreter: '/home/ubuntu/classification_waste/backend/venv/bin/python3',
     cwd: '/home/ubuntu/classification_waste/backend',
     instances: 1,
+    exec_mode: 'fork',
     autorestart: true,
     watch: false,
     max_memory_restart: '1G',
