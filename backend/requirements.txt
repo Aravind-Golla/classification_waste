@@ -4,8 +4,8 @@ flask-cors==4.0.0
 werkzeug==3.0.1
 
 # Machine Learning
-tensorflow==2.15.0
-numpy==1.24.3
+tensorflow==2.18.0
+numpy==1.26.4
 pillow==10.1.0
 
 # Production Server
