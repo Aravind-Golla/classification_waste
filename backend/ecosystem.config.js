@@ -2,7 +2,7 @@ module.exports = {
   apps: [{
     name: 'waste-classifier-api',
     script: 'app.py',
-    interpreter: 'python3',
+    interpreter: '/home/ubuntu/classification_waste/backend/venv/bin/python3',
     cwd: '/home/ubuntu/classification_waste/backend',
     instances: 1,
     autorestart: true,
