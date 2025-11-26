@@ -253,14 +253,14 @@ Body: image file
 }
 ```
 
-## 🎯 Future Enhancements
+<!-- ## 🎯 Future Enhancements
 
   * [ ] Batch image processing
   * [ ] User feedback loop for model improvement
   * [ ] Multi-language support for disposal tips
   * [ ] Mobile app (React Native)
   * [ ] Real-time camera classification
-  * [ ] Integration with local waste management APIs
+  * [ ] Integration with local waste management APIs -->
 
 ## 📄 License
 
