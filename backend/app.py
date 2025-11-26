@@ -47,10 +47,10 @@ def load_resources():
         if os.path.exists(MODEL_PATH):
             logger.info('Loading model from %s', MODEL_PATH)
             try:
-                # import tensorflow/keras lazily
-                from tensorflow.keras.models import load_model as _load_model
-                model = _load_model(MODEL_PATH)
-                logger.info('Model loaded')
+                # import tensorflow - TensorFlow 2.15 includes Keras via tf.keras
+                import tensorflow as tf
+                model = tf.keras.models.load_model(MODEL_PATH)
+                logger.info('✅ Model loaded successfully')
             except Exception as e:
                 logger.exception('Failed to import TensorFlow/Keras or load model: %s', e)
                 model = None

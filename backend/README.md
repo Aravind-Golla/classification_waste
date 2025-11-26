@@ -78,19 +78,22 @@ Ensure these files exist in the `backend/` directory:
 - `waste_classifier_mobilenet.h5` - Trained Keras model
 - `class_names.json` - Class index to name mapping
 
-### 3. Run the Server
+### 3. Environment Variables (Optional)
+
+Create a `.env` file in `backend/`:
+
+```env
+FLASK_DEBUG=False
+PORT=5000
+```
+
+### 4. Run the Server
 
 ```bash
 python app.py
 ```
 
 The API will be available at `http://localhost:5000`
-
-**Note:** The backend uses environment variables for configuration:
-- `PORT` (default: 5000) - Server port
-- `FLASK_DEBUG` (default: False) - Debug mode
-
-For PM2 deployment, these are configured in `ecosystem.config.js`
 
 ## In-Memory Processing
 
@@ -142,15 +145,13 @@ This allows frontend development without a working ML model.
 
 ### Debug Mode
 
-Enable debug mode by setting environment variable:
+Enable debug mode in `.env`:
 
-```bash
-FLASK_DEBUG=True python app.py
+```env
+FLASK_DEBUG=True
 ```
 
 **⚠️ Never use debug mode in production!**
-
-For PM2, configure in `ecosystem.config.js`.
 
 ## Troubleshooting
 
@@ -172,7 +173,12 @@ The backend has CORS enabled for all origins. If you still face issues:
 
 ### Port Already in Use
 
-Change the port using environment variable:
+Change the port in `.env`:
+```env
+PORT=5001
+```
+
+Or run directly:
 ```bash
 PORT=5001 python app.py
 ```

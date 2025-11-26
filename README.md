@@ -1,273 +1,347 @@
-# Intelligent Waste Classification using Deep Learning
+# 🌍 AI-Powered Waste Classification System
 
-A modern full-stack waste classification application built with React, Flask, and TensorFlow using Transfer Learning with MobileNetV2.
+[![TensorFlow](https://img.shields.io/badge/TensorFlow-2.15-FF6F00?logo=tensorflow)](https://www.tensorflow.org/)
+[![Flask](https://img.shields.io/badge/Flask-3.0-000000?logo=flask)](https://flask.palletsprojects.com/)
+[![React](https://img.shields.io/badge/React-18.2-61DAFB?logo=react)](https://reactjs.org/)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
------
+A production-ready waste classification web application powered by **Deep Learning (MobileNetV2)** with a modern React frontend and Flask API backend.
+
+---
 
 ## 💡 Overview
 
-This project is an **AI-powered full-stack web application** designed to classify images of waste into **12 distinct categories** including battery, biological, brown-glass, cardboard, clothes, footwear, green-glass, metal, paper, plastic, trash, and white-glass. The system leverages **Transfer Learning with MobileNetV2** for high accuracy and fast inference.
+This project is an **AI-powered waste classification system** that uses computer vision to identify and categorize waste materials in real-time. The system leverages **MobileNetV2** deep learning architecture for accurate classification across 12 waste categories.
 
-### Architecture:
+### 🎯 Key Features
 
-  * **Frontend:** Modern React SPA with drag-and-drop upload, real-time backend monitoring, and animated results
-  * **Backend:** Flask REST API with in-memory image processing (no file storage)
-  * **Model:** MobileNetV2 fine-tuned on 12 waste categories
-  * **Deployment:** Vercel (frontend) + AWS EC2 with PM2 (backend)
+- **🔍 12-Category Classification**: battery, biological, brown-glass, cardboard, clothes, footwear, green-glass, metal, paper, plastic, trash, white-glass
+- **🚀 Real-time Prediction**: In-memory image processing with instant results
+- **📊 Confidence Scoring**: AI confidence levels with risk assessment (low/medium/high)
+- **♻️ Environmental Insights**: Bin category, degradability status, and disposal tips
+- **🎨 Modern UI**: Responsive React frontend with smooth animations and gradient design
+- **⚡ Fast & Efficient**: MobileNetV2 optimized for speed without sacrificing accuracy
+- **🔒 Secure**: No file storage—all processing done in-memory
 
-The application provides actionable disposal tips and comprehensive category predictions with confidence scores.
+### 🏗️ Architecture
 
------
+```
+Frontend (React)          →    Backend (Flask API)         →    Model
+━━━━━━━━━━━━━━━                 ━━━━━━━━━━━━━━━━━━              ━━━━━━━
+- Image Upload                 - /api/health                - MobileNetV2
+- Result Display               - /api/classes               - TensorFlow 2.15
+- Modern UI                    - /api/predict               - In-memory Processing
+- Vercel Hosting               - CORS Enabled               - 224x224 Input
+```
 
-## ✨ Features
+---
 
-### Frontend
-  * **Drag-and-Drop Upload:** Modern file upload with drag-drop support
-  * **Real-Time Preview:** Full-size image preview with dark gradient background
-  * **Backend Status Monitor:** Live connection status indicator
-  * **Responsive Design:** Mobile-first design optimized for all devices
-  * **Animated Results:** Smooth animations with category confidence bars
-  * **Disposal Tips:** Actionable recycling and disposal recommendations
+## 💻 Technology Stack
 
-### Backend
-  * **12-Category Classification:** Comprehensive waste categorization
-  * **In-Memory Processing:** No file storage - RAM-only image processing for security
-  * **REST API:** Clean JSON endpoints for health check and predictions
-  * **Transfer Learning:** MobileNetV2 fine-tuned for high accuracy
-  * **CORS Enabled:** Seamless cross-origin frontend integration
+| Layer | Technology | Version | Purpose |
+|:------|:-----------|:--------|:--------|
+| **Frontend** | React | 18.2 | Modern, responsive UI with hooks |
+| | CSS3 | - | Gradient animations, glassmorphism |
+| **Backend** | Flask | 3.0 | RESTful API server |
+| | Flask-CORS | 4.0 | Cross-origin resource sharing |
+| | Gunicorn | 21.2 | Production WSGI server |
+| **AI/ML** | TensorFlow | 2.15 | Deep learning framework |
+| | MobileNetV2 | - | Pre-trained CNN architecture |
+| | NumPy | 1.24 | Numerical computations |
+| | Pillow | 10.1 | In-memory image processing |
+| **Deployment** | PM2 | - | Process management (backend) |
+| | Vercel | - | Serverless hosting (frontend) |
+| | AWS EC2 | Ubuntu | Backend hosting |
 
------
-
-## 💻 Technologies Used
-
-| Category | Technology | Purpose |
-| :--- | :--- | :--- |
-| **Frontend** | React 18.2.0 | Modern SPA with hooks and responsive design |
-| **Backend Framework** | Flask 3.0.0 | Python REST API with Flask-CORS |
-| **Deep Learning** | TensorFlow 2.15.0 | Model training and inference |
-| **Model Architecture** | MobileNetV2 | Transfer learning for efficient classification |
-| **Image Processing** | Pillow 10.1.0 | In-memory image preprocessing |
-| **Numerical Computing** | NumPy 1.24.3 | Array operations and data handling |
-| **Production Server** | Gunicorn 21.2.0 | WSGI server for production deployment |
-| **Process Management** | PM2 | Backend process management on EC2 |
-| **Hosting** | Vercel + AWS EC2 | Frontend and backend deployment |
-
------
+---
 
 ## 📁 Project Structure
 
 ```
 classification_waste/
 ├── backend/
-│   ├── app.py                          # Flask REST API
-│   ├── train_deep_model.py            # Model training script
-│   ├── waste_classifier_mobilenet.h5  # Trained MobileNetV2 model
-│   ├── class_names.json               # Category labels mapping
-│   ├── ecosystem.config.js            # PM2 configuration
-│   ├── requirements.txt               # Python dependencies
-│   └── garbage_classification/train/  # Training dataset (12 categories)
+│   ├── app.py                          # Flask API server (in-memory processing)
+│   ├── train_deep_model.py             # Model training script (MobileNetV2)
+│   ├── waste_classifier_mobilenet.h5   # Trained TensorFlow model (224x224 input)
+│   ├── class_names.json                # 12 waste categories mapping
+│   ├── ecosystem.config.js             # PM2 configuration for production
+│   ├── requirements.txt                # Python dependencies with versions
+│   └── garbage_classification/
+│       └── train/                      # Training dataset (12 categories)
+│           ├── battery/
+│           ├── biological/
+│           ├── brown-glass/
+│           ├── cardboard/
+│           ├── clothes/
+│           ├── footwear/
+│           ├── green-glass/
+│           ├── metal/
+│           ├── paper/
+│           ├── plastic/
+│           ├── trash/
+│           └── white-glass/
 ├── frontend/
+│   ├── public/
 │   ├── src/
-│   │   ├── App.js                     # Main React component
-│   │   ├── App.css                    # Global styles
-│   │   └── components/
-│   │       ├── Header.js              # Header with status indicator
-│   │       ├── ImageUpload.js         # Drag-drop upload component
-│   │       └── ResultDisplay.js       # Results with animations
-│   ├── .env.example                   # Environment template
-│   └── package.json                   # Node dependencies
-├── Document/
-│   └── readme.md                      # Detailed project documentation
-└── README.md                          # This file
+│   │   ├── App.js                      # Main React component
+│   │   ├── components/
+│   │   │   ├── Header.js               # App header
+│   │   │   ├── ImageUpload.js          # Drag-and-drop upload
+│   │   │   └── ResultDisplay.js        # Classification results
+│   │   └── index.js
+│   ├── .env                             # Environment variables (API URL)
+│   └── package.json
+├── .gitignore
+└── README.md
 ```
 
------
+---
 
-## 🛠️ Installation & Setup
+## � Quick Start
 
-### Backend Setup
+### Prerequisites
+- **Backend**: Python 3.9+, pip
+- **Frontend**: Node.js 16+, npm
 
-1.  **Clone the repository:**
-    ```bash
-    git clone https://github.com/Aravind-Golla/classification_waste.git
-    cd classification_waste/backend
-    ```
-2.  **Create and activate a virtual environment:**
-    ```bash
-    python -m venv venv
-    source venv/bin/activate  # On macOS/Linux
-    venv\Scripts\activate     # On Windows
-    ```
-3.  **Install dependencies:**
-    ```bash
-    pip install -r requirements.txt
-    ```
-4.  **Run the Flask app:**
-    ```bash
-    python app.py
-    ```
-    Backend runs on `http://127.0.0.1:5000`
+### Backend Setup (Local)
 
-### Frontend Setup
+```bash
+# Navigate to backend directory
+cd classification_waste/backend
 
-1.  **Navigate to frontend directory:**
-    ```bash
-    cd ../frontend
-    ```
-2.  **Install dependencies:**
-    ```bash
-    npm install
-    ```
-3.  **Configure backend URL:**
-    - Copy `.env.example` to `.env`
-    - Set `REACT_APP_API_BASE_URL=http://localhost:5000`
-4.  **Start development server:**
-    ```bash
-    npm start
-    ```
-    Frontend runs on `http://localhost:3000`
+# Install dependencies
+pip install -r requirements.txt
 
------
+# Run Flask development server
+python app.py
+
+# Server will start at http://localhost:5000
+```
+
+### Frontend Setup (Local)
+
+```bash
+# Navigate to frontend directory
+cd classification_waste/frontend
+
+# Install dependencies
+npm install
+
+# Start development server
+npm start
+
+# App will open at http://localhost:3000
+```
+
+### Environment Configuration
+
+**Frontend** (`.env`):
+```env
+REACT_APP_API_BASE_URL=http://localhost:5000
+```
+
+For production, update to your EC2 instance:
+```env
+REACT_APP_API_BASE_URL=http://13.233.149.179:5000
+```
+
+---
+
+## 🔌 API Documentation
+
+### Health Check
+```bash
+GET /api/health
+```
+**Response:**
+```json
+{
+  "status": "healthy",
+  "model_loaded": true,
+  "classes_loaded": 12,
+  "processing": "in-memory"
+}
+```
+
+### Get Classes
+```bash
+GET /api/classes
+```
+**Response:**
+```json
+{
+  "classes": ["battery", "biological", "brown-glass", ...],
+  "total": 12
+}
+```
+
+### Predict Waste Type
+```bash
+POST /api/predict
+Content-Type: multipart/form-data
+```
+**Request:** Upload image file with field name `image`
+
+**Response:**
+```json
+{
+  "predicted_class": "plastic",
+  "confidence": 0.95,
+  "confidence_percentage": 95.32,
+  "category": "Plastic",
+  "degradable": false,
+  "risk_level": "low",
+  "disposal_tip": "Check the recycling number. Clean and dry before recycling."
+}
+```
+
+---
 
 ## 🧠 Model Training (Optional)
 
-You only need to run this if you want to retrain the model on your own dataset.
+Only needed if you want to retrain with custom dataset:
 
-1.  Place your image dataset in `backend/garbage_classification/train/[CATEGORY_NAME]/`
-2.  Run the training script:
-    ```bash
-    cd backend
-    python train_deep_model.py
-    ```
-    This script will:
-      * Load images from 12 waste categories
-      * Apply data augmentation for better generalization
-      * Fine-tune MobileNetV2 with custom classification head
-      * Train with validation split
-      * Save the final model as `waste_classifier_mobilenet.h5` and class names as `class_names.json`
-
------
-
-## ▶️ Usage
-
-1.  **Ensure both backend and frontend are running** (see Installation & Setup above)
-2.  **Access the application:**
-    Open your web browser and navigate to:
-    ```
-    http://localhost:3000
-    ```
-3.  **Classify Waste:** 
-    - Drag-and-drop a waste image or click to browse
-    - View classification results with confidence scores
-    - See disposal tips and all category predictions
-    - Backend status indicator shows connection health
-
------
-
-## 🌿 Waste Categories & Disposal Tips
-
-The model classifies waste into **12 categories** with disposal recommendations:
-
-| Category | Recyclability | Disposal Tip |
-| :--- | :--- | :--- |
-| **Battery** | ⚠️ Hazardous | Take to designated battery recycling centers |
-| **Biological** | 🌱 Compostable | Compost at home or use municipal composting |
-| **Brown Glass** | ♻️ Recyclable | Rinse and place in glass recycling bin |
-| **Cardboard** | ♻️ Recyclable | Flatten boxes and recycle with paper |
-| **Clothes** | ♻️ Reusable | Donate wearable items or textile recycling |
-| **Footwear** | ♻️ Reusable | Donate or recycle through shoe programs |
-| **Green Glass** | ♻️ Recyclable | Rinse and recycle with glass containers |
-| **Metal** | ♻️ Recyclable | Clean and place in metal recycling bin |
-| **Paper** | ♻️ Recyclable | Keep dry and recycle with paper products |
-| **Plastic** | ♻️ Recyclable | Check local recycling guidelines for type |
-| **Trash** | 🗑️ Landfill | Dispose in general waste bin |
-| **White Glass** | ♻️ Recyclable | Rinse and recycle separately from colored glass |
-
------
-
-## 🚀 Production Deployment
-
-### EC2 Backend (Ubuntu)
 ```bash
+cd backend
+
+# Ensure dataset is in garbage_classification/train/ with 12 subdirectories
+python train_deep_model.py
+
+# This will:
+# - Load and preprocess images (resize to 224x224)
+# - Train MobileNetV2 with transfer learning
+# - Apply data augmentation
+# - Save model as waste_classifier_mobilenet.h5
+# - Save class mappings to class_names.json
+```
+
+---
+
+## 🌐 Production Deployment
+
+### Backend on AWS EC2 (Ubuntu)
+
+```bash
+# SSH into your EC2 instance
+ssh -i your-key.pem ubuntu@your-ec2-ip
+
 # Update system
 sudo apt update && sudo apt upgrade -y
 
-# Install Python & dependencies
-sudo apt install -y python3 python3-pip python3-venv
+# Install Python and dependencies
+sudo apt install python3 python3-pip -y
+
+# Install PM2 (process manager)
+sudo npm install -g pm2
 
 # Clone repository
 git clone https://github.com/Aravind-Golla/classification_waste.git
 cd classification_waste/backend
 
-# Setup virtual environment
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
+# Install Python packages
+pip3 install -r requirements.txt
 
-# Install PM2
-sudo npm install -g pm2
-
-# Start with PM2
+# Start API with PM2
 pm2 start ecosystem.config.js
 pm2 save
-pm2 startup
+pm2 startup  # Follow the instructions to enable auto-start
+
+# Check status
+pm2 status
+pm2 logs waste-classifier-api
 ```
 
-### Vercel Frontend
+### Frontend on Vercel
+
+1. Push code to GitHub
+2. Visit [vercel.com](https://vercel.com) and import your repository
+3. Configure environment variable:
+   - Key: `REACT_APP_API_BASE_URL`
+   - Value: `http://your-ec2-ip:5000`
+4. Deploy automatically
+
+### Alternative: Backend without Virtual Environment
+
 ```bash
-cd frontend
-vercel --prod
-```
-Set environment variable in Vercel dashboard:
-- `REACT_APP_API_BASE_URL=https://your-api-gateway-url`
+# Install packages globally (use with caution)
+sudo pip3 install flask==3.0.0 flask-cors==4.0.0 tensorflow==2.15.0 numpy==1.24.3 pillow==10.1.0 gunicorn==21.2.0
 
-### PM2 Management Commands
-```bash
-pm2 status                          # Check process status
-pm2 logs waste-classifier-api       # View logs
-pm2 restart waste-classifier-api    # Restart app
-pm2 stop waste-classifier-api       # Stop app
+# Start with PM2 using system Python
+pm2 start ecosystem.config.js
 ```
 
-## 📊 API Endpoints
+---
 
-### Health Check
-```bash
-GET /api/health
-# Response: {"status": "healthy", "model_loaded": true, "processing": "in-memory"}
-```
+## 🌿 Waste Classification Categories
 
-### Predict Waste Category
-```bash
-POST /api/predict
-Content-Type: multipart/form-data
-Body: image file
+| Waste Type | Bin Category | Degradable | Disposal Tip |
+|:-----------|:-------------|:-----------|:-------------|
+| **battery** | Metal | ❌ No | Take to designated battery recycling center |
+| **biological** | Organic | ✅ Yes | Compost if possible, or use organic waste bin |
+| **brown-glass** | Glass | ❌ No | Rinse clean and recycle. Remove lids/caps |
+| **cardboard** | Paper | ✅ Yes | Recycle in paper bin. Remove tape/labels |
+| **clothes** | Textile | ❌ No | Donate if reusable, or textile recycling |
+| **footwear** | Textile | ❌ No | Donate if reusable, or textile recycling |
+| **green-glass** | Glass | ❌ No | Rinse clean and recycle. Remove lids/caps |
+| **metal** | Metal | ❌ No | Rinse and recycle. Highly recyclable! |
+| **paper** | Paper | ✅ Yes | Recycle in paper bin. Remove plastic tape |
+| **plastic** | Plastic | ❌ No | Check recycling number. Clean and dry |
+| **trash** | Unknown | ❓ Varies | Check local guidelines |
+| **white-glass** | Glass | ❌ No | Rinse clean and recycle. Remove lids/caps |
 
-# Response:
-{
-  "label": "plastic",
-  "category": "plastic",
-  "confidence": 95.8,
-  "all_predictions": {...},
-  "disposal_tip": "Check local recycling guidelines..."
-}
-```
+---
+
+## 📊 Model Performance
+
+- **Architecture**: MobileNetV2 (Transfer Learning)
+- **Input Size**: 224x224x3 RGB images
+- **Training Dataset**: 12 waste categories
+- **Preprocessing**: Image normalization (0-1 scale), data augmentation
+- **Output**: Softmax probabilities across 12 classes
+- **Inference Time**: < 100ms per image (in-memory processing)
+
+---
 
 ## 🎯 Future Enhancements
 
-  * [ ] Batch image processing
-  * [ ] User feedback loop for model improvement
-  * [ ] Multi-language support for disposal tips
-  * [ ] Mobile app (React Native)
-  * [ ] Real-time camera classification
-  * [ ] Integration with local waste management APIs
+- [ ] **Mobile App**: Native iOS/Android apps
+- [ ] **Batch Processing**: Upload and classify multiple images
+- [ ] **Location Services**: Find nearest recycling centers
+- [ ] **Gamification**: Reward users for proper waste sorting
+- [ ] **Multi-language Support**: Localization for global use
+- [ ] **Dataset Expansion**: Add more waste categories
+- [ ] **Real-time Video**: Classify waste from camera feed
+- [ ] **Analytics Dashboard**: Track usage statistics and trends
 
-## 📄 License
+---
 
-This project is open source and available under the MIT License.
+## 📝 License
+
+This project is licensed under the MIT License.
+
+---
+
+## 👥 Contributors
+
+- **Aravind Golla** - [@Aravind-Golla](https://github.com/Aravind-Golla)
+
+---
 
 ## 🙏 Acknowledgments
 
-- MobileNetV2 architecture from TensorFlow
-- Training dataset from Kaggle Garbage Classification
-- React community for frontend best practices
+- MobileNetV2 architecture by Google Research
+- TensorFlow team for the ML framework
+- React community for frontend libraries
+- Open-source waste classification datasets
+
+---
+
+## 📧 Contact & Support
+
+For questions, issues, or contributions:
+- **GitHub Issues**: [Report a bug](https://github.com/Aravind-Golla/classification_waste/issues)
+- **Repository**: [classification_waste](https://github.com/Aravind-Golla/classification_waste)
+
+---
+
+**⭐ If you find this project helpful, please give it a star!**
