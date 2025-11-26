@@ -1,8 +1,17 @@
-flask
-scikit-learn
-scikit-image
-numpy
-joblib
-werkzeug
-tensorflow
+# Flask and API dependencies
+flask==3.0.0
+flask-cors==4.0.0
+werkzeug==3.0.1
+
+# Machine Learning
+tensorflow==2.15.0
+numpy==1.24.3
+pillow==10.1.0
+
+# Production Server
+gunicorn==21.2.0
+
+# Data Science (for training scripts - optional)
+scikit-learn==1.3.2
+scikit-image==0.22.0
 
