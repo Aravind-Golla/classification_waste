@@ -4,21 +4,16 @@ flask-cors==4.0.0
 werkzeug==3.0.0
 
 # Deep Learning (CPU version for Ubuntu EC2)
-tensorflow-cpu==2.15.0
-keras==2.15.0
-numpy==1.24.3
-pillow==10.1.0
+tensorflow-cpu>=2.16.0
+numpy>=1.24.0
+pillow>=10.0.0
 
 # Data Processing
-pandas==2.0.3
+pandas>=2.0.0
 
 # Production WSGI Server
 gunicorn==21.2.0
 
-# Image Processing
-Pillow==10.1.0
-
 # Additional dependencies for TensorFlow
 h5py>=3.1.0
-protobuf>=3.20.3,<5.0.0dev
 
