@@ -1,31 +1,40 @@
-# Intelligent Waste Classification using Support Vector Machine (SVM)
+# Intelligent Waste Classification using Deep Learning
 
-A high-accuracy waste classification web application built using traditional Machine Learning with Feature Engineering and Flask.
+A modern full-stack waste classification application built with React, Flask, and TensorFlow using Transfer Learning with MobileNetV2.
 
 -----
 
 ## 💡 Overview
 
-This project is an **AI-powered web application** designed to classify images of waste into distinct categories (such as Paper, Plastic, Metal, etc.). Unlike modern deep learning methods, this system achieves high accuracy using a **Support Vector Machine (SVM)** classifier combined with sophisticated **handcrafted features**.
+This project is an **AI-powered full-stack web application** designed to classify images of waste into **12 distinct categories** including battery, biological, brown-glass, cardboard, clothes, footwear, green-glass, metal, paper, plastic, trash, and white-glass. The system leverages **Transfer Learning with MobileNetV2** for high accuracy and fast inference.
 
-### Classification Methodology:
+### Architecture:
 
-  * **Model:** Support Vector Machine (SVC) with Radial Basis Function (RBF) kernel.
-  * **Features:** A combined feature vector of **Color Histograms** and **HOG (Histogram of Oriented Gradients)** to capture both color distribution and texture/shape information.
-  * **Web Framework:** **Flask** handles image upload, feature extraction, model inference, and displaying results.
+  * **Frontend:** Modern React SPA with drag-and-drop upload, real-time backend monitoring, and animated results
+  * **Backend:** Flask REST API with in-memory image processing (no file storage)
+  * **Model:** MobileNetV2 fine-tuned on 12 waste categories
+  * **Deployment:** Vercel (frontend) + AWS EC2 with PM2 (backend)
 
-The model is trained on a comprehensive dataset (expected to be named `garbage_classification` or similar) to ensure robust performance.
+The application provides actionable disposal tips and comprehensive category predictions with confidence scores.
 
 -----
 
 ## ✨ Features
 
-  * **Image Upload:** Users can upload a waste image via a simple web form.
-  * **ML-Powered Classification:** Predicts the waste category using the highly efficient **SVM** classifier.
-  * **Feature Engineering:** Classification is based on the image's **Color Histogram** and **HOG (texture)** features.
-  * **Environmental Insights:** Provides crucial information like the waste's bin **Category** and its **Degradability** status.
-  * **Confidence Score:** Displays the model's prediction confidence (derived from `predict_proba` or `decision_function`).
-  * **User-Friendly Interface:** Clean, responsive design for easy interaction.
+### Frontend
+  * **Drag-and-Drop Upload:** Modern file upload with drag-drop support
+  * **Real-Time Preview:** Full-size image preview with dark gradient background
+  * **Backend Status Monitor:** Live connection status indicator
+  * **Responsive Design:** Mobile-first design optimized for all devices
+  * **Animated Results:** Smooth animations with category confidence bars
+  * **Disposal Tips:** Actionable recycling and disposal recommendations
+
+### Backend
+  * **12-Category Classification:** Comprehensive waste categorization
+  * **In-Memory Processing:** No file storage - RAM-only image processing for security
+  * **REST API:** Clean JSON endpoints for health check and predictions
+  * **Transfer Learning:** MobileNetV2 fine-tuned for high accuracy
+  * **CORS Enabled:** Seamless cross-origin frontend integration
 
 -----
 
@@ -33,37 +42,55 @@ The model is trained on a comprehensive dataset (expected to be named `garbage_c
 
 | Category | Technology | Purpose |
 | :--- | :--- | :--- |
-| **Machine Learning** | **scikit-learn** (SVM, SVC) | The primary ML library for training and inference. |
-| **Web Framework** | **Flask** | Python framework for the web application backend. |
-| **Image Processing** | **scikit-image** (skimage) | Used for image manipulation (resize, HOG calculation). |
-| **Serialization** | **Joblib** | Used to save and load the trained SVM model (`waste_svm_classifier.pkl`). |
-| **Dependencies** | NumPy, werkzeug | Data handling and secure file management. |
+| **Frontend** | React 18.2.0 | Modern SPA with hooks and responsive design |
+| **Backend Framework** | Flask 3.0.0 | Python REST API with Flask-CORS |
+| **Deep Learning** | TensorFlow 2.15.0 | Model training and inference |
+| **Model Architecture** | MobileNetV2 | Transfer learning for efficient classification |
+| **Image Processing** | Pillow 10.1.0 | In-memory image preprocessing |
+| **Numerical Computing** | NumPy 1.24.3 | Array operations and data handling |
+| **Production Server** | Gunicorn 21.2.0 | WSGI server for production deployment |
+| **Process Management** | PM2 | Backend process management on EC2 |
+| **Hosting** | Vercel + AWS EC2 | Frontend and backend deployment |
 
 -----
 
 ## 📁 Project Structure
 
 ```
-.
-├── Project files/
-│   ├── app.py                     # Flask web application (front-end & inference)
-│   ├── train_model.py             # Script for feature extraction & SVM training
-│   ├── waste_svm_classifier.pkl   # The trained SVM model file (Joblib format)
-│   └── class_names.json           # Mapping of class indices to human-readable names
-├── requirements.txt               # Project dependencies
-└── README.md
+classification_waste/
+├── backend/
+│   ├── app.py                          # Flask REST API
+│   ├── train_deep_model.py            # Model training script
+│   ├── waste_classifier_mobilenet.h5  # Trained MobileNetV2 model
+│   ├── class_names.json               # Category labels mapping
+│   ├── ecosystem.config.js            # PM2 configuration
+│   ├── requirements.txt               # Python dependencies
+│   └── garbage_classification/train/  # Training dataset (12 categories)
+├── frontend/
+│   ├── src/
+│   │   ├── App.js                     # Main React component
+│   │   ├── App.css                    # Global styles
+│   │   └── components/
+│   │       ├── Header.js              # Header with status indicator
+│   │       ├── ImageUpload.js         # Drag-drop upload component
+│   │       └── ResultDisplay.js       # Results with animations
+│   ├── .env.example                   # Environment template
+│   └── package.json                   # Node dependencies
+├── Document/
+│   └── readme.md                      # Detailed project documentation
+└── README.md                          # This file
 ```
-
-*Note: The model expects the training data to be in a directory structure like `garbage_classification/train/[CLASS_NAME]/`.*
 
 -----
 
 ## 🛠️ Installation & Setup
 
+### Backend Setup
+
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/VivekAllu16/waste_management_and_identification.git
-    cd waste_management_and_identification
+    git clone https://github.com/Aravind-Golla/classification_waste.git
+    cd classification_waste/backend
     ```
 2.  **Create and activate a virtual environment:**
     ```bash
@@ -72,11 +99,33 @@ The model is trained on a comprehensive dataset (expected to be named `garbage_c
     venv\Scripts\activate     # On Windows
     ```
 3.  **Install dependencies:**
-    *(You will need to create a `requirements.txt` file listing all dependencies: `flask`, `scikit-learn`, `scikit-image`, `numpy`, `joblib`, `werkzeug`)*
     ```bash
     pip install -r requirements.txt
     ```
-4.  **Model and Class Names:** Ensure `waste_svm_classifier.pkl` and `class_names.json` are present in the root directory alongside `app.py`.
+4.  **Run the Flask app:**
+    ```bash
+    python app.py
+    ```
+    Backend runs on `http://127.0.0.1:5000`
+
+### Frontend Setup
+
+1.  **Navigate to frontend directory:**
+    ```bash
+    cd ../frontend
+    ```
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
+3.  **Configure backend URL:**
+    - Copy `.env.example` to `.env`
+    - Set `REACT_APP_API_BASE_URL=http://localhost:5000`
+4.  **Start development server:**
+    ```bash
+    npm start
+    ```
+    Frontend runs on `http://localhost:3000`
 
 -----
 
@@ -84,53 +133,141 @@ The model is trained on a comprehensive dataset (expected to be named `garbage_c
 
 You only need to run this if you want to retrain the model on your own dataset.
 
-1.  Place your image dataset in the expected structure (e.g., `garbage_classification/train/`).
+1.  Place your image dataset in `backend/garbage_classification/train/[CATEGORY_NAME]/`
 2.  Run the training script:
     ```bash
-    python train_model.py
+    cd backend
+    python train_deep_model.py
     ```
     This script will:
-      * Load images and extract features (Histogram + HOG).
-      * Split the data (80% train, 20% test).
-      * Train the RBF-kernel SVM model.
-      * Print the **Accuracy, Confusion Matrix, and Classification Report**.
-      * Save the final model as `waste_svm_classifier.pkl` and class names as `class_names.json`.
+      * Load images from 12 waste categories
+      * Apply data augmentation for better generalization
+      * Fine-tune MobileNetV2 with custom classification head
+      * Train with validation split
+      * Save the final model as `waste_classifier_mobilenet.h5` and class names as `class_names.json`
 
 -----
 
 ## ▶️ Usage
 
-1.  **Start the Flask application:**
-    ```bash
-    python Project files/app.py
-    ```
+1.  **Ensure both backend and frontend are running** (see Installation & Setup above)
 2.  **Access the application:**
     Open your web browser and navigate to:
     ```
-    http://127.0.0.1:5000/
+    http://localhost:3000
     ```
-3.  **Classify Waste:** Upload an image and view the predicted class, category, degradability, and confidence score.
+3.  **Classify Waste:** 
+    - Drag-and-drop a waste image or click to browse
+    - View classification results with confidence scores
+    - See disposal tips and all category predictions
+    - Backend status indicator shows connection health
 
 -----
 
-## 🌿 Environmental Information Mapping
+## 🌿 Waste Categories & Disposal Tips
 
-The `app.py` script contains simple keyword logic to map the predicted waste class to a general category and degradability status:
+The model classifies waste into **12 categories** with disposal recommendations:
 
-| Predicted Waste Class (Example) | Bin Category | Degradability Status |
+| Category | Recyclability | Disposal Tip |
 | :--- | :--- | :--- |
-| Any class containing 'paper' | Paper | Degradable |
-| Any class containing 'plastic' | Plastic | Non-degradable |
-| Any class containing 'glass' | Glass | Non-degradable |
-| Any class containing 'metal' or 'can' | Metal | Non-degradable |
-| Any class containing 'bio', 'organic', 'food', 'compost' | Organic | Degradable |
-| Others | Unknown | Unknown |
+| **Battery** | ⚠️ Hazardous | Take to designated battery recycling centers |
+| **Biological** | 🌱 Compostable | Compost at home or use municipal composting |
+| **Brown Glass** | ♻️ Recyclable | Rinse and place in glass recycling bin |
+| **Cardboard** | ♻️ Recyclable | Flatten boxes and recycle with paper |
+| **Clothes** | ♻️ Reusable | Donate wearable items or textile recycling |
+| **Footwear** | ♻️ Reusable | Donate or recycle through shoe programs |
+| **Green Glass** | ♻️ Recyclable | Rinse and recycle with glass containers |
+| **Metal** | ♻️ Recyclable | Clean and place in metal recycling bin |
+| **Paper** | ♻️ Recyclable | Keep dry and recycle with paper products |
+| **Plastic** | ♻️ Recyclable | Check local recycling guidelines for type |
+| **Trash** | 🗑️ Landfill | Dispose in general waste bin |
+| **White Glass** | ♻️ Recyclable | Rinse and recycle separately from colored glass |
 
 -----
+
+## 🚀 Production Deployment
+
+### EC2 Backend (Ubuntu)
+```bash
+# Update system
+sudo apt update && sudo apt upgrade -y
+
+# Install Python & dependencies
+sudo apt install -y python3 python3-pip python3-venv
+
+# Clone repository
+git clone https://github.com/Aravind-Golla/classification_waste.git
+cd classification_waste/backend
+
+# Setup virtual environment
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+
+# Install PM2
+sudo npm install -g pm2
+
+# Start with PM2
+pm2 start ecosystem.config.js
+pm2 save
+pm2 startup
+```
+
+### Vercel Frontend
+```bash
+cd frontend
+vercel --prod
+```
+Set environment variable in Vercel dashboard:
+- `REACT_APP_API_BASE_URL=https://your-api-gateway-url`
+
+### PM2 Management Commands
+```bash
+pm2 status                          # Check process status
+pm2 logs waste-classifier-api       # View logs
+pm2 restart waste-classifier-api    # Restart app
+pm2 stop waste-classifier-api       # Stop app
+```
+
+## 📊 API Endpoints
+
+### Health Check
+```bash
+GET /api/health
+# Response: {"status": "healthy", "model_loaded": true, "processing": "in-memory"}
+```
+
+### Predict Waste Category
+```bash
+POST /api/predict
+Content-Type: multipart/form-data
+Body: image file
+
+# Response:
+{
+  "label": "plastic",
+  "category": "plastic",
+  "confidence": 95.8,
+  "all_predictions": {...},
+  "disposal_tip": "Check local recycling guidelines..."
+}
+```
 
 ## 🎯 Future Enhancements
 
-  * **Dataset Integration:** Incorporate the full dataset for a more robust model.
-  * **Dynamic Mapping:** Implement a more comprehensive and configurable mapping for environmental labels outside of the `app.py` script.
-  * **Web Interface Polish:** Improve the `index.html` template for better visualization and user experience.
-  * **Cloud Deployment:** Deploy the Flask application to a cloud platform (e.g., AWS, Heroku).
+  * [ ] Batch image processing
+  * [ ] User feedback loop for model improvement
+  * [ ] Multi-language support for disposal tips
+  * [ ] Mobile app (React Native)
+  * [ ] Real-time camera classification
+  * [ ] Integration with local waste management APIs
+
+## 📄 License
+
+This project is open source and available under the MIT License.
+
+## 🙏 Acknowledgments
+
+- MobileNetV2 architecture from TensorFlow
+- Training dataset from Kaggle Garbage Classification
+- React community for frontend best practices
