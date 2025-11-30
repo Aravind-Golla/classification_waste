@@ -14,6 +14,20 @@
   --bg-gradient: linear-gradient(180deg, #f9fafb 0%, #ffffff 100%);
   --card-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
   --card-shadow-hover: 0 15px 50px rgba(0, 0, 0, 0.12);
+  --card-bg: #ffffff;
+  --border-color: rgba(0, 0, 0, 0.04);
+}
+
+/* Dark mode variables */
+[data-theme="dark"] {
+  --text-primary: #f9fafb;
+  --text-secondary: #d1d5db;
+  --text-muted: #9ca3af;
+  --bg-gradient: linear-gradient(180deg, #111827 0%, #1f2937 100%);
+  --card-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  --card-shadow-hover: 0 15px 50px rgba(0, 0, 0, 0.4);
+  --card-bg: #1f2937;
+  --border-color: rgba(255, 255, 255, 0.1);
 }
 
 * {
@@ -22,7 +36,9 @@
   padding: 0;
 }
 
-body, html, #root {
+body,
+html,
+#root {
   height: 100%;
   margin: 0;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -85,39 +101,6 @@ body, html, #root {
   .container::-webkit-scrollbar-track {
     background: transparent;
   }
-
-  .container::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, rgba(102, 126, 234, 0.4) 0%, rgba(118, 75, 162, 0.4) 100%);
-    border-radius: 10px;
-  }
-
-  .container::-webkit-scrollbar-thumb:active {
-    background: linear-gradient(180deg, rgba(102, 126, 234, 0.7) 0%, rgba(118, 75, 162, 0.7) 100%);
-  }
-}
-
-.card {
-  background: #ffffff;
-  border-radius: 16px;
-  box-shadow: var(--card-shadow);
-  padding: 24px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border: 1px solid rgba(0, 0, 0, 0.04);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-/* Desktop card enhancement */
-@media (min-width: 1200px) {
-  .card {
-    border-radius: 20px;
-    padding: 32px;
-  }
-}
-
-.card:hover {
-  box-shadow: var(--card-shadow-hover);
 }
 
 .upload-card {
@@ -188,16 +171,17 @@ body, html, #root {
     max-height: none;
     border-radius: 14px;
   }
-  
-  .upload-card, .result-card {
+
+  .upload-card,
+  .result-card {
     min-height: auto;
   }
-  
+
   /* Display result card first on mobile */
   .result-card {
     order: -1;
   }
-  
+
   .upload-card {
     order: 0;
   }
@@ -308,6 +292,7 @@ body, html, #root {
     opacity: 0;
     transform: scale(0.9);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
@@ -341,7 +326,9 @@ body, html, #root {
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .result-list {
@@ -402,8 +389,13 @@ body, html, #root {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes bounceIn {
@@ -411,9 +403,11 @@ body, html, #root {
     transform: scale(0);
     opacity: 0;
   }
+
   50% {
     transform: scale(1.1);
   }
+
   100% {
     transform: scale(1);
     opacity: 1;
@@ -431,6 +425,202 @@ body, html, #root {
     transform: translateY(20px);
     opacity: 0;
   }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.btn:hover::before {
+  left: 100%;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.muted {
+  color: var(--text-muted);
+}
+
+.preview {
+  max-width: 100%;
+  max-height: 300px;
+  height: auto;
+  border-radius: 12px;
+  margin-top: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(102, 126, 234, 0.1);
+  animation: fadeInScale 0.4s ease;
+  transition: all 0.3s ease;
+}
+
+.preview:hover {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15), 0 0 0 2px rgba(102, 126, 234, 0.2);
+  transform: scale(1.02);
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.loading-spinner {
+  border: 3px solid rgba(102, 126, 234, 0.1);
+  border-top: 3px solid var(--accent);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  animation: spin 0.8s linear infinite;
+  margin: 12px auto;
+}
+
+@media (min-width: 1200px) {
+  .loading-spinner {
+    width: 42px;
+    height: 42px;
+    border-width: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .loading-spinner {
+    width: 32px;
+    height: 32px;
+    border-width: 2.5px;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.result-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.result-item {
+  padding: 12px 0;
+  border-bottom: 1px solid #f3f4f6;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.result-item:last-child {
+  border-bottom: none;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge-success {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--success);
+}
+
+.badge-warning {
+  background: rgba(245, 158, 11, 0.1);
+  color: var(--warning);
+}
+
+.badge-danger {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--danger);
+}
+
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #e5e7eb, transparent);
+  margin: 20px 0;
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes expandWidth {
+  from {
+    width: 0;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+
   to {
     transform: translateY(0);
     opacity: 1;
@@ -438,12 +628,28 @@ body, html, #root {
 }
 
 @keyframes pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: scale(1);
     opacity: 1;
   }
+
   50% {
     transform: scale(1.15);
     opacity: 0.8;
+  }
+}
+
+/* Confetti animation */
+@keyframes confettiFall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
   }
 }
