@@ -24,61 +24,69 @@ export default function Header({ backendConnected }) {
       <div style={{
         maxWidth: 1600,
         margin: '0 auto',
-        padding: isMobile ? '0 16px' : '0 40px',
+        padding: isMobile ? '0 12px' : '0 40px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        flexWrap: 'wrap',
-        gap: isMobile ? '12px' : '20px'
+        flexWrap: 'nowrap', // Keep everything on one line
+        gap: isMobile ? '8px' : '20px'
       }}>
-        <div style={{ 
-          display: 'flex', 
-          alignItems: 'center', 
-          gap: isMobile ? '12px' : '16px' 
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: isMobile ? '10px' : '16px',
+          flex: '1 1 auto', // Allow to shrink on mobile
+          minWidth: 0 // Prevent overflow
         }}>
           <div style={{
-            fontSize: isMobile ? '28px' : '36px',
-            filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))'
+            fontSize: isMobile ? '24px' : '36px',
+            filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))',
+            flexShrink: 0
           }}>
             ♻️
           </div>
-          <div>
+          <div style={{ minWidth: 0 }}>
             <h1 style={{
               margin: 0,
               fontSize: isMobile ? 20 : 26,
               fontWeight: 700,
               color: '#ffffff',
-              letterSpacing: '-0.5px'
+              letterSpacing: '-0.5px',
+              whiteSpace: isMobile ? 'nowrap' : 'normal'
             }}>
               Waste Classifier
             </h1>
             <div style={{
-              fontSize: isMobile ? 11 : 14,
+              fontSize: isMobile ? 10 : 14,
               color: 'rgba(255, 255, 255, 0.9)',
               marginTop: isMobile ? 2 : 4,
-              fontWeight: 500
+              fontWeight: 500,
+              whiteSpace: 'nowrap'
             }}>
-              AI-Powered Recognition
+              {isMobile ? 'AI Recognition' : 'AI-Powered Recognition'}
             </div>
           </div>
         </div>
         <div style={{
           display: 'flex',
           alignItems: 'center',
-          gap: isMobile ? '8px' : '10px',
-          background: backendConnected 
-            ? 'rgba(16, 185, 129, 0.25)' 
+          gap: isMobile ? '6px' : '10px',
+          background: backendConnected
+            ? 'rgba(16, 185, 129, 0.25)'
             : 'rgba(239, 68, 68, 0.25)',
-          padding: isMobile ? '8px 14px' : '10px 18px',
+          padding: isMobile ? '6px 10px' : '10px 18px',
           borderRadius: '24px',
           backdropFilter: 'blur(10px)',
-          fontSize: isMobile ? 12 : 14,
+          fontSize: isMobile ? 11 : 14,
           color: '#fff',
           fontWeight: 600,
-          border: '1px solid rgba(255, 255, 255, 0.3)'
+          border: '1px solid rgba(255, 255, 255, 0.3)',
+          flexShrink: 0,
+          whiteSpace: 'nowrap'
         }}>
-          <span style={{ fontSize: isMobile ? 14 : 16 }}>{getStatusIcon()}</span>
-          <span>{isMobile ? getStatusText() : `Backend: ${getStatusText()}`}</span>
+          <span style={{ fontSize: isMobile ? 12 : 16 }}>{getStatusIcon()}</span>
+          <span style={{ display: isMobile ? 'none' : 'inline' }}>Backend: </span>
+          <span>{getStatusText()}</span>
         </div>
       </div>
     </header>

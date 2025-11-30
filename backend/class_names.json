@@ -1,1 +1,14 @@
-{"0": "battery", "1": "biological", "2": "brown-glass", "3": "cardboard", "4": "clothes", "5": "footwear", "6": "green-glass", "7": "metal", "8": "paper", "9": "plastic", "10": "trash", "11": "white-glass"}
+{
+  "0": "battery",
+  "1": "biological",
+  "2": "brown-glass",
+  "3": "cardboard",
+  "4": "clothes",
+  "5": "footwear",
+  "6": "green-glass",
+  "7": "metal",
+  "8": "paper",
+  "9": "plastic",
+  "10": "trash",
+  "11": "white-glass"
+}
